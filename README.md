@@ -52,8 +52,15 @@ You will be asked about the code you submit so you should be able to explain why
 
 # Notes for later (documentation / assumptions)
 1- choosing Grails. //TODO: explain benefits  
+
 2- domain modelling:  //TODO: explain  
     a) KISS principle - do not over-engineer  
-    b) requirements still not clear at this stage - understand from client - assume the simplest for now (purpose of app is to just gather data for now. model can be simple. no need for normalization...)
-   
+    b) requirements still not clear at this stage - understand from client - assume the simplest for now (purpose of app is to just gather data for now. model can be simple. no need for normalization...)  
+    c) explain that encapsulation is not being disrespected (what happens under the hood in Grails)  
+
+3- testing:  explain why some testing has been made at this stage. rather than waiting till next story as in the problem statement  
+    try to test ASAP whenever possible (specially & at least unit testing)  
+    DONE definition of a story should include a minimum level of testing (to be agreed with the team)  
+    
+
 Note: thinking out loud, to show my way of processing & tackling the problem

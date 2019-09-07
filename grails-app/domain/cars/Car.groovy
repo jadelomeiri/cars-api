@@ -8,7 +8,7 @@ class Car {
     String make
     String model
     String colour
-    int year
+    Integer year
 
     static constraints = {
         make nullable: false, blank: false
