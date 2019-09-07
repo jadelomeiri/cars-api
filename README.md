@@ -49,3 +49,7 @@ You can use whatever online resources you want (aside from copy-pasting large ch
 You are encouraged to use any frameworks or libraries you feel comfortable with.
 
 You will be asked about the code you submit so you should be able to explain why every line is there.
+
+# Notes for later (documentation / assumptions)
+1- choosing Grails. //TODO: explain benefits
+
