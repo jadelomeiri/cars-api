@@ -9,11 +9,7 @@ import grails.testing.gorm.DomainUnitTest
 class MakeControllerSpec extends Specification implements ControllerUnitTest<MakeController>, DomainUnitTest<Make> {
 
     def populateValidParams(params) {
-        assert params != null
-
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
+        params["name"] = 'valid name'
     }
 
     void "Test the index action returns the correct response"() {
@@ -59,7 +55,7 @@ class MakeControllerSpec extends Specification implements ControllerUnitTest<Mak
 
         then:
         response.status == CREATED.value()
-        response.json
+        //response.json
     }
 
     void "Test the save action with an invalid instance"() {
@@ -79,7 +75,7 @@ class MakeControllerSpec extends Specification implements ControllerUnitTest<Mak
 
         then:
         response.status == UNPROCESSABLE_ENTITY.value()
-        response.json.errors
+        response.json.message != null
     }
 
     void "Test the show action with a null id"() {
@@ -98,7 +94,7 @@ class MakeControllerSpec extends Specification implements ControllerUnitTest<Mak
     void "Test the show action with a valid id"() {
         given:
         controller.makeService = Mock(MakeService) {
-            1 * get(2) >> new Make()
+            1 * get(2) >> new Make(name: "valid name")
         }
 
         when:"A domain instance is passed to the show action"
@@ -137,7 +133,7 @@ class MakeControllerSpec extends Specification implements ControllerUnitTest<Mak
 
         then:
         response.status == OK.value()
-        response.json
+        //response.json
     }
 
     void "Test the update action with an invalid instance"() {
@@ -157,7 +153,7 @@ class MakeControllerSpec extends Specification implements ControllerUnitTest<Mak
 
         then:
         response.status == UNPROCESSABLE_ENTITY.value()
-        response.json.errors
+        response.json.message != null
     }
 
     void "Test the delete action with a null instance"() {

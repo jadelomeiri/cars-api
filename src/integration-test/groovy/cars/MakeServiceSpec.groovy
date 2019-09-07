@@ -13,14 +13,9 @@ class MakeServiceSpec extends Specification {
     SessionFactory sessionFactory
 
     private Long setupData() {
-        // TODO: Populate valid domain instances and return a valid ID
-        //new Make(...).save(flush: true, failOnError: true)
-        //new Make(...).save(flush: true, failOnError: true)
-        //Make make = new Make(...).save(flush: true, failOnError: true)
-        //new Make(...).save(flush: true, failOnError: true)
-        //new Make(...).save(flush: true, failOnError: true)
-        assert false, "TODO: Provide a setupData() implementation for this generated test suite"
-        //make.id
+        new Make(name: "Tesla").save(flush: true, failOnError: true)
+        Make make = new Make(name: "Ford").save(flush: true, failOnError: true)
+        make.id
     }
 
     void "test get"() {
@@ -38,34 +33,33 @@ class MakeServiceSpec extends Specification {
 
         then:
         makeList.size() == 2
-        assert false, "TODO: Verify the correct instances are returned"
+        //assert false, "TODO: Verify the correct instances are returned"
     }
 
     void "test count"() {
         setupData()
 
         expect:
-        makeService.count() == 5
+        makeService.count() == 4
     }
 
     void "test delete"() {
         Long makeId = setupData()
 
         expect:
-        makeService.count() == 5
+        makeService.count() == 4
 
         when:
         makeService.delete(makeId)
         sessionFactory.currentSession.flush()
 
         then:
-        makeService.count() == 4
+        makeService.count() == 3
     }
 
     void "test save"() {
         when:
-        assert false, "TODO: Provide a valid instance to save"
-        Make make = new Make()
+        Make make = new Make(name: "new make")
         makeService.save(make)
 
         then:

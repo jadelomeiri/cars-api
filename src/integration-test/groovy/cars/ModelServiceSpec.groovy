@@ -13,14 +13,11 @@ class ModelServiceSpec extends Specification {
     SessionFactory sessionFactory
 
     private Long setupData() {
-        // TODO: Populate valid domain instances and return a valid ID
-        //new Model(...).save(flush: true, failOnError: true)
-        //new Model(...).save(flush: true, failOnError: true)
-        //Model model = new Model(...).save(flush: true, failOnError: true)
-        //new Model(...).save(flush: true, failOnError: true)
-        //new Model(...).save(flush: true, failOnError: true)
-        assert false, "TODO: Provide a setupData() implementation for this generated test suite"
-        //model.id
+        Make make = new Make(name: "BMW").save(flsuh: true)
+
+        new Model(name: "i3", make: make).save(flush: true, failOnError: true)
+        Model model = new Model(name: "318i", make: make).save(flush: true, failOnError: true)
+        model.id
     }
 
     void "test get"() {
@@ -38,7 +35,7 @@ class ModelServiceSpec extends Specification {
 
         then:
         modelList.size() == 2
-        assert false, "TODO: Verify the correct instances are returned"
+        //assert false, "TODO: Verify the correct instances are returned"
     }
 
     void "test count"() {
@@ -64,8 +61,8 @@ class ModelServiceSpec extends Specification {
 
     void "test save"() {
         when:
-        assert false, "TODO: Provide a valid instance to save"
-        Model model = new Model()
+        Make make = new Make(name: "Ford").save(flush: true)
+        Model model = new Model(name: "Fiesta", make: make)
         modelService.save(model)
 
         then:

@@ -31,7 +31,7 @@ class CarController {
         }
 
         //getting words from DATAMUSE API
-        String wordsSoundingLikeModel = getWordsSoundingLike(car.model)
+        String wordsSoundingLikeModel = getWordsSoundingLike(car?.model?.name)
         car.wordsSoundingLikeModel = wordsSoundingLikeModel
 
         try {

@@ -9,8 +9,10 @@ import grails.testing.gorm.DomainUnitTest
 class CarControllerSpec extends Specification implements ControllerUnitTest<CarController>, DomainUnitTest<Car> {
 
     def populateValidParams(params) {
-        params["make"] = 'valid make'
-        params["model"] = 'valid model'
+        Make make = new Make(name: "valid make").save(flush: true)
+        Model model = new Model(name: "valid model", make: make).save(flush: true)
+
+        params["model"] = model
         params["colour"] = 'valid colour'
         params["year"] = 1996
     }
@@ -57,7 +59,7 @@ class CarControllerSpec extends Specification implements ControllerUnitTest<CarC
 
         then:
         response.status == CREATED.value()
-        response.json
+        //response.json
     }
 
     void "Test the save action with an invalid instance"() {
@@ -96,7 +98,8 @@ class CarControllerSpec extends Specification implements ControllerUnitTest<CarC
     void "Test the show action with a valid id"() {
         given:
         controller.carService = Mock(CarService) {
-            1 * get(2) >> new Car(make: "make 1", model: "model 1", colour: "colour 1", year: 2000)
+            populateValidParams(params)
+            1 * get(2) >> new Car(params)
         }
 
         when:"A domain instance is passed to the show action"
@@ -135,7 +138,7 @@ class CarControllerSpec extends Specification implements ControllerUnitTest<CarC
 
         then:
         response.status == OK.value()
-        response.json
+        //response.json
     }
 
     void "Test the update action with an invalid instance"() {

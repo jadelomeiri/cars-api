@@ -13,9 +13,12 @@ class CarServiceSpec extends Specification {
     SessionFactory sessionFactory
 
     private Long setupData() {
+        Make make = new Make(name: "Alpha Romeo").save(flush: true)
+        Model model = new Model(name: "Giulietta", make: make).save(flush: true)
+
         // 3 cars are being populated in Bootstrap.groovy
-        Car car1 = new Car(make: "make 1", model: "model 1", colour: "colour 1", year: 2001).save(flush: true, failOnError: true)
-        Car car2 = new Car(make: "make 2", model: "model 2", colour: "colour 2", year: 2002).save(flush: true, failOnError: true)
+        Car car1 = new Car(model: model, colour: "colour 1", year: 2001).save(flush: true, failOnError: true)
+        Car car2 = new Car(model: model, colour: "colour 2", year: 2002).save(flush: true, failOnError: true)
         car2.id
     }
 
@@ -60,7 +63,9 @@ class CarServiceSpec extends Specification {
 
     void "test save"() {
         when:
-        Car car = new Car(make: "new make", model: "new model", colour: "new colour", year: 1990)
+        Make make = new Make(name: "Mitsubishi").save(flush: true)
+        Model model = new Model(name: "Lancer EX", make: make).save(flush: true)
+        Car car = new Car(model: model, colour: "white", year: 2019)
         carService.save(car)
 
         then:
