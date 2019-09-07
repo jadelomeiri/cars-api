@@ -1,0 +1,9 @@
+import cars.Make
+
+model {
+	Make make
+}
+
+json {
+    json hal.render(make, [deep:true])
+}

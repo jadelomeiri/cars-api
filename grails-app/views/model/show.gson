@@ -1,0 +1,9 @@
+import cars.Model
+
+model {
+	Model model
+}
+
+json {
+    json hal.render(model, [deep:true])
+}

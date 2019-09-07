@@ -71,6 +71,9 @@ You will be asked about the code you submit so you should be able to explain why
   //TODO: replace local db by cloud db
   
 6- words sounding like model  
-   
+   story specifies few words as being the requirement.  
+   Need to understand from client how many is few? for now assumption is 3 words
+
+7- explain domain model refactoring - why it made sense now. story about linked resources    
 
 Note: thinking out loud, to show my way of processing & tackling the problem

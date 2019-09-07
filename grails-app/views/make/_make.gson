@@ -1,0 +1,7 @@
+import cars.Make
+
+model {
+	Make make
+}
+
+json g.render(make, [resolveTemplate: false])

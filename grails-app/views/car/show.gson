@@ -4,4 +4,6 @@ model {
 	Car car
 }
 
-json tmpl.car(car)
+json {
+    json hal.render(car, [deep:true])
+}

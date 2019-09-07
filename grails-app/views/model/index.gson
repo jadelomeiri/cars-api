@@ -1,0 +1,8 @@
+import cars.Model
+
+model {
+	Iterable<Model> modelList
+}
+
+json tmpl.model(modelList ?: [])
+

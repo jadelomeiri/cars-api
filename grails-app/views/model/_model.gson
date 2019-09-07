@@ -1,0 +1,7 @@
+import cars.Model
+
+model {
+	Model model
+}
+
+json g.render(model, [resolveTemplate: false])
