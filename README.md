@@ -51,5 +51,9 @@ You are encouraged to use any frameworks or libraries you feel comfortable with.
 You will be asked about the code you submit so you should be able to explain why every line is there.
 
 # Notes for later (documentation / assumptions)
-1- choosing Grails. //TODO: explain benefits
-
+1- choosing Grails. //TODO: explain benefits  
+2- domain modelling:  //TODO: explain  
+    a) KISS principle - do not over-engineer  
+    b) requirements still not clear at this stage - understand from client - assume the simplest for now (purpose of app is to just gather data for now. model can be simple. no need for normalization...)
+   
+Note: thinking out loud, to show my way of processing & tackling the problem
