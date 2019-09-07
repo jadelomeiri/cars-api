@@ -65,5 +65,12 @@ You will be asked about the code you submit so you should be able to explain why
 4- merge story: "As a Consumer of the API, I would like to be able to update my existing cars"  
    why? Grails makes it easy to have it from the beginning
 
+5- persistence/db:  
+  ideally test db should be in the cloud. 
+  had connection issues (could be related to proxy), so decided to connect to local db for now  
+  //TODO: replace local db by cloud db
+  
+6- words sounding like model  
+   
 
 Note: thinking out loud, to show my way of processing & tackling the problem

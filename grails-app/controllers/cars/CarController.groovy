@@ -1,9 +1,14 @@
 package cars
 
 import grails.validation.ValidationException
+import javax.servlet.http.HttpServletRequest
 import static org.springframework.http.HttpStatus.*
+import groovyx.net.http.*
+import static groovyx.net.http.ContentType.JSON
 
 class CarController {
+
+    private static final String DATAMUSE_API_ENDPOINT = "https://api.datamuse.com/words?max=3&sl="
 
     CarService carService
 
@@ -24,6 +29,10 @@ class CarController {
             render status: NOT_FOUND
             return
         }
+
+        //getting words from DATAMUSE API
+        String wordsSoundingLikeModel = getWordsSoundingLike(car.model)
+        car.wordsSoundingLikeModel = wordsSoundingLikeModel
 
         try {
             carService.save(car)
@@ -60,5 +69,19 @@ class CarController {
         carService.delete(id)
 
         render status: NO_CONTENT
+    }
+
+    private String getWordsSoundingLike(String word) {
+        if(!word) return ""
+
+        String wordEncoded = URLEncoder.encode(word, "UTF-8")
+
+        def http = new HTTPBuilder(DATAMUSE_API_ENDPOINT + wordEncoded)
+        http.request(Method.GET, JSON) {
+            response.success = { resp, json ->
+                return json.word
+            }
+        }
+        return word
     }
 }

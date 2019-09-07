@@ -61,6 +61,7 @@ dependencies {
 
     //added dependencies
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.6'
+    compile group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7.1'
 }
 
 bootRun {

@@ -13,7 +13,7 @@ class CarServiceSpec extends Specification {
     SessionFactory sessionFactory
 
     private Long setupData() {
-        // TODO: Populate valid domain instances and return a valid ID
+        // 3 cars are being populated in Bootstrap.groovy
         Car car1 = new Car(make: "make 1", model: "model 1", colour: "colour 1", year: 2001).save(flush: true, failOnError: true)
         Car car2 = new Car(make: "make 2", model: "model 2", colour: "colour 2", year: 2002).save(flush: true, failOnError: true)
         car2.id
@@ -33,7 +33,7 @@ class CarServiceSpec extends Specification {
         List<Car> carList = carService.list()
 
         then:
-        carList.size() == 2
+        carList.size() == 5
         //assert false, "TODO: Verify the correct instances are returned"
     }
 
@@ -41,21 +41,21 @@ class CarServiceSpec extends Specification {
         setupData()
 
         expect:
-        carService.count() == 2
+        carService.count() == 5
     }
 
     void "test delete"() {
         Long carId = setupData()
 
         expect:
-        carService.count() == 2
+        carService.count() == 5
 
         when:
         carService.delete(carId)
         sessionFactory.currentSession.flush()
 
         then:
-        carService.count() == 1
+        carService.count() == 4
     }
 
     void "test save"() {
