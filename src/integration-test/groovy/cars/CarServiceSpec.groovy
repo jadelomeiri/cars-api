@@ -14,13 +14,9 @@ class CarServiceSpec extends Specification {
 
     private Long setupData() {
         // TODO: Populate valid domain instances and return a valid ID
-        //new Car(...).save(flush: true, failOnError: true)
-        //new Car(...).save(flush: true, failOnError: true)
-        //Car car = new Car(...).save(flush: true, failOnError: true)
-        //new Car(...).save(flush: true, failOnError: true)
-        //new Car(...).save(flush: true, failOnError: true)
-        assert false, "TODO: Provide a setupData() implementation for this generated test suite"
-        //car.id
+        Car car1 = new Car(make: "make 1", model: "model 1", colour: "colour 1", year: 2001).save(flush: true, failOnError: true)
+        Car car2 = new Car(make: "make 2", model: "model 2", colour: "colour 2", year: 2002).save(flush: true, failOnError: true)
+        car2.id
     }
 
     void "test get"() {
@@ -34,38 +30,37 @@ class CarServiceSpec extends Specification {
         setupData()
 
         when:
-        List<Car> carList = carService.list(max: 2, offset: 2)
+        List<Car> carList = carService.list()
 
         then:
         carList.size() == 2
-        assert false, "TODO: Verify the correct instances are returned"
+        //assert false, "TODO: Verify the correct instances are returned"
     }
 
     void "test count"() {
         setupData()
 
         expect:
-        carService.count() == 5
+        carService.count() == 2
     }
 
     void "test delete"() {
         Long carId = setupData()
 
         expect:
-        carService.count() == 5
+        carService.count() == 2
 
         when:
         carService.delete(carId)
         sessionFactory.currentSession.flush()
 
         then:
-        carService.count() == 4
+        carService.count() == 1
     }
 
     void "test save"() {
         when:
-        assert false, "TODO: Provide a valid instance to save"
-        Car car = new Car()
+        Car car = new Car(make: "new make", model: "new model", colour: "new colour", year: 1990)
         carService.save(car)
 
         then:

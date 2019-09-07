@@ -62,5 +62,8 @@ You will be asked about the code you submit so you should be able to explain why
     try to test ASAP whenever possible (specially & at least unit testing)  
     DONE definition of a story should include a minimum level of testing (to be agreed with the team)  
     
+4- merge story: "As a Consumer of the API, I would like to be able to update my existing cars"  
+   why? Grails makes it easy to have it from the beginning
+
 
 Note: thinking out loud, to show my way of processing & tackling the problem

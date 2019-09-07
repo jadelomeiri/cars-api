@@ -9,11 +9,10 @@ import grails.testing.gorm.DomainUnitTest
 class CarControllerSpec extends Specification implements ControllerUnitTest<CarController>, DomainUnitTest<Car> {
 
     def populateValidParams(params) {
-        assert params != null
-
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
+        params["make"] = 'valid make'
+        params["model"] = 'valid model'
+        params["colour"] = 'valid colour'
+        params["year"] = 1996
     }
 
     void "Test the index action returns the correct response"() {
@@ -29,7 +28,6 @@ class CarControllerSpec extends Specification implements ControllerUnitTest<CarC
         then:"The response is correct"
             response.text == '[]'
     }
-
 
     void "Test the save action with a null instance"() {
         when:
@@ -79,7 +77,7 @@ class CarControllerSpec extends Specification implements ControllerUnitTest<CarC
 
         then:
         response.status == UNPROCESSABLE_ENTITY.value()
-        response.json.errors
+        response.json._embedded.errors != null
     }
 
     void "Test the show action with a null id"() {
@@ -98,7 +96,7 @@ class CarControllerSpec extends Specification implements ControllerUnitTest<CarC
     void "Test the show action with a valid id"() {
         given:
         controller.carService = Mock(CarService) {
-            1 * get(2) >> new Car()
+            1 * get(2) >> new Car(make: "make 1", model: "model 1", colour: "colour 1", year: 2000)
         }
 
         when:"A domain instance is passed to the show action"
@@ -157,7 +155,7 @@ class CarControllerSpec extends Specification implements ControllerUnitTest<CarC
 
         then:
         response.status == UNPROCESSABLE_ENTITY.value()
-        response.json.errors
+        response.json._embedded.errors != null
     }
 
     void "Test the delete action with a null instance"() {
