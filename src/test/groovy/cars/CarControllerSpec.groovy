@@ -28,7 +28,7 @@ class CarControllerSpec extends Specification implements ControllerUnitTest<CarC
             controller.index()
 
         then:"The response is correct"
-            response.text == '[]'
+            response.text == ''
     }
 
     void "Test the save action with a null instance"() {
@@ -107,7 +107,6 @@ class CarControllerSpec extends Specification implements ControllerUnitTest<CarC
 
         then:"A model is populated containing the domain instance"
         response.status == OK.value()
-        response.json
     }
 
     void "Test the update action with a null instance"() {
@@ -138,7 +137,6 @@ class CarControllerSpec extends Specification implements ControllerUnitTest<CarC
 
         then:
         response.status == OK.value()
-        //response.json
     }
 
     void "Test the update action with an invalid instance"() {

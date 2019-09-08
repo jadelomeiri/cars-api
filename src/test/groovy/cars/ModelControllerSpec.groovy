@@ -26,7 +26,7 @@ class ModelControllerSpec extends Specification implements ControllerUnitTest<Mo
             controller.index()
 
         then:"The response is correct"
-            response.text == '[]'
+            response.text == ''
     }
 
 
@@ -58,7 +58,6 @@ class ModelControllerSpec extends Specification implements ControllerUnitTest<Mo
 
         then:
         response.status == CREATED.value()
-        //response.json
     }
 
     void "Test the save action with an invalid instance"() {

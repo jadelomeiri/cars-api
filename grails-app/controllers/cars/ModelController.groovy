@@ -7,15 +7,25 @@ class ModelController {
 
     ModelService modelService
 
-    static responseFormats = ['json', 'xml']
+    static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
-        respond modelService.list(params), model:[modelCount: modelService.count()]
+        List<Model> modelList = modelService.list(params)
+        int modelCount = modelService.count()
+
+        render(view: "index", model: [modelList: modelList, modelCount: modelCount])
     }
 
     def show(Long id) {
-        respond modelService.get(id)
+        Model model = modelService.get(id)
+
+        if(model == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        render(view: "show", model: [model: model])
     }
 
     def save(Model model) {
@@ -31,7 +41,7 @@ class ModelController {
             return
         }
 
-        respond model, [status: CREATED, view:"show"]
+        render(view: "show", model: [model: model], status: CREATED)
     }
 
     def update(Model model) {
@@ -47,7 +57,7 @@ class ModelController {
             return
         }
 
-        respond model, [status: OK, view:"show"]
+        render(view: "show", model: [model: model], status: OK)
     }
 
     def delete(Long id) {

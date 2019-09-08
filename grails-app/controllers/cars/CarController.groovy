@@ -12,15 +12,25 @@ class CarController {
 
     CarService carService
 
-    static responseFormats = ['json', 'xml']
+    static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
-        respond carService.list(params), model:[carCount: carService.count()]
+        List<Car> carList = carService.list(params)
+        int carCount = carService.count()
+
+        render(view: "index", model: [carList: carList, carCount: carCount])
     }
 
     def show(Long id) {
-        respond carService.get(id)
+        Car car = carService.get(id)
+
+        if(car == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        render(view: "show", model: [car: car])
     }
 
     def save(Car car) {

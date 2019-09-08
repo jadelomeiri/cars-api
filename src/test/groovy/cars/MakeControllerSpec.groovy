@@ -23,7 +23,7 @@ class MakeControllerSpec extends Specification implements ControllerUnitTest<Mak
             controller.index()
 
         then:"The response is correct"
-            response.text == '[]'
+            response.text == ''
     }
 
 
@@ -55,7 +55,6 @@ class MakeControllerSpec extends Specification implements ControllerUnitTest<Mak
 
         then:
         response.status == CREATED.value()
-        //response.json
     }
 
     void "Test the save action with an invalid instance"() {
@@ -102,7 +101,6 @@ class MakeControllerSpec extends Specification implements ControllerUnitTest<Mak
 
         then:"A model is populated containing the domain instance"
         response.status == OK.value()
-        response.json
     }
 
     void "Test the update action with a null instance"() {
@@ -133,7 +131,6 @@ class MakeControllerSpec extends Specification implements ControllerUnitTest<Mak
 
         then:
         response.status == OK.value()
-        //response.json
     }
 
     void "Test the update action with an invalid instance"() {

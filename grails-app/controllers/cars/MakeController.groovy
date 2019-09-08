@@ -7,15 +7,25 @@ class MakeController {
 
     MakeService makeService
 
-    static responseFormats = ['json', 'xml']
+    static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
-        respond makeService.list(params), model:[makeCount: makeService.count()]
+        List<Make> makeList = makeService.list(params)
+        int makeCount = makeService.count()
+
+        render(view: "index", model: [makeList: makeList, makeCount: makeCount])
     }
 
     def show(Long id) {
-        respond makeService.get(id)
+        Make make = makeService.get(id)
+
+        if(make == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        render(view: "show", model: [make: make])
     }
 
     def save(Make make) {
@@ -31,7 +41,7 @@ class MakeController {
             return
         }
 
-        respond make, [status: CREATED, view:"show"]
+        render(view: "show", model: [make: make], status: CREATED)
     }
 
     def update(Make make) {
@@ -47,7 +57,7 @@ class MakeController {
             return
         }
 
-        respond make, [status: OK, view:"show"]
+        render(view: "show", model: [make: make], status: OK)
     }
 
     def delete(Long id) {
