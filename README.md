@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jadelomeiri/cars-api.svg?branch=master)](https://travis-ci.org/jadelomeiri/cars-api)
+
 # Cars Web Dev Test
 
 # Cars API
