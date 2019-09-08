@@ -68,6 +68,7 @@ hibernate:
         queries: false
         use_second_level_cache: false
         use_query_cache: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 dataSource:
     pooled: true
     jmxExport: true
@@ -82,10 +83,12 @@ environments:
             password: ''
     test:
         dataSource:
+            pooled: false
+            jmxExport: true
             dbCreate: update
-            url: jdbc:postgresql://localhost:5434/cars-db
-            username: postgres
-            password: admin
+            url: jdbc:postgresql://manny.db.elephantsql.com:5432/uefmkyxp
+            username: uefmkyxp
+            password: O6neNzjV1J59EqxmxGZfHFv8gDB8Db0G
             dialect: org.hibernate.dialect.PostgreSQLDialect
             driverClassName: org.postgresql.Driver
     production:
