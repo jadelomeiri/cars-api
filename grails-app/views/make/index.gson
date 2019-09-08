@@ -4,5 +4,19 @@ model {
 	Iterable<Make> makeList
 }
 
-json tmpl.make(makeList ?: [])
-
+json {
+    hal.links {
+        self {
+            href g.link(resource:"make", action:"index", absolute:true)
+            hreflang 'en_GB'
+            type "application/hal+json"
+        }
+    }
+    hal.embedded {
+        makes( makeList ) { Make make ->
+            id make.id
+            name make.name
+        }
+    }
+    count makeList.size()
+}

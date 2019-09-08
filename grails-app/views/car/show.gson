@@ -1,9 +1,19 @@
 import cars.Car
+import cars.Model
 
 model {
 	Car car
 }
 
 json {
-    json hal.render(car, [deep:true])
+    hal.links(car)
+    hal.embedded {
+        model( car.model ) { Model model ->
+            id model.id
+            name model.name
+        }
+    }
+    id car.id
+    colour car.colour
+    year car.year
 }

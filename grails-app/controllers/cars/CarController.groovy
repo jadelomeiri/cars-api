@@ -81,6 +81,5 @@ class CarController {
                 return json.word
             }
         }
-        return word
     }
 }

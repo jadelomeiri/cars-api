@@ -76,4 +76,8 @@ You will be asked about the code you submit so you should be able to explain why
 
 7- explain domain model refactoring - why it made sense now. story about linked resources    
 
+8- test coverage - clover
+
+9 - how to test & run app
+
 Note: thinking out loud, to show my way of processing & tackling the problem

@@ -4,5 +4,20 @@ model {
 	Iterable<Model> modelList
 }
 
-json tmpl.model(modelList ?: [])
+json {
+    hal.links {
+        self {
+            href g.link(resource:"model", action:"index", absolute:true)
+            hreflang 'en_GB'
+            type "application/hal+json"
+        }
+    }
+    hal.embedded {
+        models( modelList ) { Model model ->
+            id model.id
+            name model.name
+        }
+    }
+    count modelList.size()
+}
 

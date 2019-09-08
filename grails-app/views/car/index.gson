@@ -4,5 +4,21 @@ model {
 	Iterable<Car> carList
 }
 
-json tmpl.car(carList ?: [])
+json {
+    hal.links {
+        self {
+            href g.link(resource:"car", action:"index", absolute:true)
+            hreflang 'en_GB'
+            type "application/hal+json"
+        }
+    }
+    hal.embedded {
+        cars( carList ) { Car car ->
+            id car.id
+            colour car.colour
+            year car.year
+        }
+    }
+    count carList.size()
+}
 
