@@ -23,42 +23,40 @@ class CarServiceSpec extends Specification {
     }
 
     void "test get"() {
-        setupData()
+        Long carId = setupData()
 
         expect:
-        carService.get(1) != null
+        carService.get(carId) != null
     }
 
     void "test list"() {
         setupData()
 
         when:
-        List<Car> carList = carService.list()
+        List<Car> carList = carService.list(max: 2)
 
         then:
-        carList.size() == 5
-        //assert false, "TODO: Verify the correct instances are returned"
+        carList.size() == 2
     }
 
     void "test count"() {
         setupData()
 
         expect:
-        carService.count() == 5
+        carService.count() > 0
     }
 
     void "test delete"() {
         Long carId = setupData()
 
-        expect:
-        carService.count() == 5
+        int numOfCars = carService.count()
 
         when:
         carService.delete(carId)
         sessionFactory.currentSession.flush()
 
         then:
-        carService.count() == 4
+        carService.count() == numOfCars - 1
     }
 
     void "test save"() {

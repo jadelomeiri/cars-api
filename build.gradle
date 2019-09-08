@@ -7,6 +7,7 @@ buildscript {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "org.grails.plugins:hibernate5:${gormVersion-".RELEASE"}"
         classpath "org.grails.plugins:views-gradle:1.2.9"
+        classpath 'com.bmuschko:gradle-clover-plugin:2.1.1'
     }
 }
 
@@ -18,6 +19,7 @@ apply plugin:"idea"
 apply plugin:"war"
 apply plugin:"org.grails.grails-web"
 apply plugin:"org.grails.plugins.views-json"
+apply from: "${project.projectDir}/gradle/clover.gradle"
 
 repositories {
     mavenLocal()
@@ -62,6 +64,7 @@ dependencies {
     //added dependencies
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.6'
     compile group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7.1'
+    compile 'org.codehaus.groovy:groovy-all:2.4.10'
 }
 
 bootRun {

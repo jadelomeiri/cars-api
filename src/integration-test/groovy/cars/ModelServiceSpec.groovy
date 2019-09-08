@@ -21,42 +21,40 @@ class ModelServiceSpec extends Specification {
     }
 
     void "test get"() {
-        setupData()
+        Long modelId = setupData()
 
         expect:
-        modelService.get(1) != null
+        modelService.get(modelId) != null
     }
 
     void "test list"() {
         setupData()
 
         when:
-        List<Model> modelList = modelService.list(max: 2, offset: 2)
+        List<Model> modelList = modelService.list(max: 2)
 
         then:
         modelList.size() == 2
-        //assert false, "TODO: Verify the correct instances are returned"
     }
 
     void "test count"() {
         setupData()
 
         expect:
-        modelService.count() == 5
+        modelService.count() > 0
     }
 
     void "test delete"() {
         Long modelId = setupData()
 
-        expect:
-        modelService.count() == 5
+        int numOfModels = modelService.count()
 
         when:
         modelService.delete(modelId)
         sessionFactory.currentSession.flush()
 
         then:
-        modelService.count() == 4
+        modelService.count() == numOfModels - 1
     }
 
     void "test save"() {
