@@ -10,8 +10,7 @@ class MakeController {
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def index() {
         respond makeService.list(params), model:[makeCount: makeService.count()]
     }
 
