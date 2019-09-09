@@ -89,7 +89,7 @@ With no client around I started by assuming the simplest:
  - No unique restrictions on any of the data (for ex. the same car with the same properties can exist multiple times).
  - All car properties are required (for ex. a car can't exist without a colour)
 
-So my initial model consisted of single Car domain containing: id, make, model, colour, year.
+So my initial model consisted of a single Car domain containing: id, make, model, colour, year.
 
     class Car {
        String make
@@ -104,13 +104,13 @@ So my initial model consisted of single Car domain containing: id, make, model, 
            year nullable: false, blank: false
        }
        
-####Note on encapsulation:
+#### Note on encapsulation:
 It might look like encapsulation hasn't been respected, but it was.  
 This is one awesome way that Grails works.  
-Under the hood, Grails injects setter & getter at runtime.  
+Under the hood, Grails injects setters & getters at runtime.  
 When doing Car.make, the make property is not being accessed directly.  
 Car.make is exactly the same as Car.getMake().  
-As a matter of fact developers can user Car.getMake() & Car.setMake() without having the methods explicitly coded.  
+As a matter of fact developers can use Car.getMake() & Car.setMake() without having the methods explicitly coded.  
 
 #### Domain Model Refactoring
 Fast forward towards the end of the project, I now started working on:  
@@ -119,29 +119,31 @@ Fast forward towards the end of the project, I now started working on:
   ii) Model
 
 Now with the need of having resources linked hierarchically, it made sense to refactor the domain.  
-My domain model now consisted of 3 separate domains: Make, Model, and Car.
+My domain model now consisted of 3 separate domains: Make, Model, and Car.  
+
 New set of assumptions:
  - Make & Model have a 1-to-many relation. 1 Make can have multiple Models (ex. Kia can have Picanto & Cerato).  
- - The Model belongs to the Make which means deleting the Make would delete the Models
+ - The Model belongs to the Make which means deleting the Make would delete the Models.
  - Model & Car have a 1-to-many relation. 1 Model can have multiple Cars (ex. Cerato can have a red car & a blue car).  
  - The car belongs to the Model. Deleting the Model would delete the Car.
- - Correctness of the data is now more important
+ - Correctness of the data is now more important.
  - A car is not directly linked to a Make to avoid bad linking (ex. Red 2019 Mercedes Cerato shouldn't exist).  
- - Make names are unique (ex. can have only 1 Mercedes)
- - Model names are unique (ex. can have only 1 Cerato)  
+ - Make names are unique (ex. can have only 1 Mercedes).
+ - Model names are unique (ex. can have only 1 Cerato)  .
  - Cars are not unique. We have assumed our client is not using the app as an encyclopedia of cars. We'd need to double check directly with them.  
  
 ### REST API  
 For my REST API, I tried to use best practices for URL names as well as proper use of HTTP methods.  
 
 Initially, when my model was simple and consisted of only a Car domain, I had the following endpoints exposed:  
-Add: /car/ [POST]  
-Retrieve all cars: /car/ [GET]  
-Retrieve specific car: /car/${id} [GET]  
-Remove: /car/${id} [DELTE]  
-Update: /car/${id} [PUT]  
 
-####Note on Update:  
+    Add: /car/ [POST]  
+    Retrieve all cars: /car/ [GET]  
+    Retrieve specific car: /car/${id} [GET]  
+    Remove: /car/${id} [DELTE]  
+    Update: /car/${id} [PUT]  
+
+#### Note on Update:  
 I worked on the Update functionality as part of the first story.  
 Reason is it was so easy to have it from the beginning with Grails. It didn't require extra effort.  
 Lucky for us, our client actually needed it.
@@ -149,28 +151,30 @@ Lucky for us, our client actually needed it.
 #### Additional Endpoints
 With the model refactoring and with the new requirement for linked resources, I had to expose my new resources.  
 I now have Models & Makes exposed in a similar way to Car.  
+
 I now also have:  
-Add make: /make/ [POST]  
-Retrieve all makes: /make/ [GET]  
-Retrieve specific make: /make/${id} [GET]  
-Remove make: /make/${id} [DELTE]  
-Update make: /make/${id} [PUT]  
-Add model: /model/ [POST]  
-Retrieve all models: /model/ [GET]  
-Retrieve specific make: /model/${id} [GET]  
-Remove model: /model/${id} [DELTE]  
-Update model: /model/${id} [PUT]  
+
+    Add make: /make/ [POST]  
+    Retrieve all makes: /make/ [GET]  
+    Retrieve specific make: /make/${id} [GET]  
+    Remove make: /make/${id} [DELTE]  
+    Update make: /make/${id} [PUT]  
+    Add model: /model/ [POST]  
+    Retrieve all models: /model/ [GET]  
+    Retrieve specific make: /model/${id} [GET]  
+    Remove model: /model/${id} [DELTE]  
+    Update model: /model/${id} [PUT]  
 
 Assumption here was that client would want to add/remove/update Makes and Models that are or aren't already in the database.  
 
 ##### HAL
 To represent my linked resources I decided to follow the HAL standard.  
-Navigation is through the API is now easier.
+Navigation through the API is now easier.
 
 
 ## 3- Testing:  
-I have decided to write tests as soon as I was writing code.
-I believe tests should be part of the DONE definition of stories rather than separate stories  
+I have decided to write tests as soon as I could.  
+I believe tests should be part of the DONE definition of stories rather than separate stories.  
 In my opinion, that should be the case for at least unit tests.  
 But this would usually need to be discussed and agreed with the team.  
 
@@ -183,7 +187,7 @@ Types of testing done:
 
 ## 5- Persistence / db:  
 I initially started with an in-memory H2 database.  
-Later, when I got to the story about persistence, I added persistence to a Postres database hosted in the cloud.  
+Later, when I got to the story about persistence, I added persistence to a Postgres database hosted in the cloud.  
 
 For your convenience I kept both datasources.  
 H2 is used in the dev environment & Postgres is used in the test environment.  
@@ -191,7 +195,7 @@ H2 is used in the dev environment & Postgres is used in the test environment.
 ## 6- Words sounding like model:  
 Story specifies few words as being the requirement.   
 Need to understand from client how many is considered a few?  
-Assumption was to put a limit of 3 words   
+Assumption was to put a limit of 3 words  . 
 
 ## 8- Test coverage - clover:
 Having finished my project on time, I decided to add Clover for test coverage.  
@@ -259,7 +263,7 @@ The application will be running on port 8080 and can be accessed through:
     localhost:8080
     localhost:8080/car/1 //for ex. to retrieve car with id=1. 
 
-Please see [Additional Endpoints](#Additional Endpoints)  
+Please see [Additional Endpoints](#additional-endpoints)  
 
 
 # Many thanks!
