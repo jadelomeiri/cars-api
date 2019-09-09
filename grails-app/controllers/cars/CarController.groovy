@@ -8,6 +8,7 @@ import static groovyx.net.http.ContentType.JSON
 
 class CarController {
 
+    //TODO: max=3 should go in a final var MAX_WORDS = 3
     private static final String DATAMUSE_API_ENDPOINT = "https://api.datamuse.com/words?max=3&sl="
 
     CarService carService
